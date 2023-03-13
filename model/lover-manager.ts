@@ -73,7 +73,6 @@ export class LoverManager {
             Action.showNotification(notFoundMessage);
             return;
         }
-        // console.log(this.loverList)
         console.log("Lover ID ||       Lover Name       ||  Zodiac Sign  ||   Origin   ||  YOB  ||  Hobby");
         for (let i = 0; i < N; i++) {
             let currentLover = this.loverList[i];

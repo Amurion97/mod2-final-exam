@@ -1,9 +1,4 @@
-// @ts-check
-// import {DB} from "../data/DB";
-import {GetInput} from "./get-input";
 import chalk = require("chalk");
-
-
 
 export class Action {
     static sayBye():void {

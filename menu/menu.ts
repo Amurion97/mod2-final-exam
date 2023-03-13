@@ -11,7 +11,6 @@ export class Menu {
     static menuNavigation(): void {
         Action.showMenuName("MANAGE LOVER PROGRAM");
         let index = readlineSync.keyInSelect(Menu.menu, 'What would you like to do? ');
-        // console.log(index);
         switch (index) {
             case 0:
                 break;
@@ -32,9 +31,9 @@ export class Menu {
                 Menu.removeUser();
                 break;
             case -1:
-                // if (GetInput.getConfirmation(Menu.menuNavigation, "you want to exit")) {
+                if (GetInput.getConfirmation(Menu.menuNavigation, "you want to exit")) {
                     Action.sayBye();
-                // }
+                }
                 break;
         }
         switch (index) {
@@ -66,13 +65,11 @@ export class Menu {
         Action.showMenuName("ADD LOVER");
         let name: string = GetInput.getString("lover name",Menu.menuNavigation);
         let zodiac: string = GetInput.getZodiac();
-        // console.log(zodiac);
         let origin: string = GetInput.getString("origin",Menu.menuNavigation);
         let YOB: number = GetInput.getNumber("YOB", Menu.menuNavigation);
         let hobby: string = GetInput.getString("hobby",Menu.menuNavigation);
-        // let password = GetInput.getPasswordToChange("", Menu.menuNavigation);
-        // let userID = LOVERS.generateNewID();
-        LOVERS.addLover(new Lover(LOVERS.generateNewID(), name, zodiac, origin, YOB, hobby));
+        let loverID = LOVERS.generateNewID();
+        LOVERS.addLover(new Lover(loverID, name, zodiac, origin, YOB, hobby));
         Action.showNotification("Successfully added new user");
     }
 
@@ -83,20 +80,15 @@ export class Menu {
             Action.showNotification("THAT LOVER DOES NOT EXIST")
         } else {
             let index = LOVERS.findIndexByLoverID(loverID);
-            let lover = LOVERS.getLoverByIndex(index);
+            let chosenLover = LOVERS.getLoverByIndex(index);
             let name: string = GetInput.getString("lover name", Menu.menuNavigation);
             let zodiac: string = GetInput.getZodiac();
-            // console.log(zodiac);
             let origin: string = GetInput.getString("origin", Menu.menuNavigation);
             let YOB: number = GetInput.getNumber("YOB", Menu.menuNavigation);
             let hobby: string = GetInput.getString("hobby", Menu.menuNavigation);
-            // let oldUsername = customer.username;
-            // let newUsername: string = GetInput.getUsernameToChange(oldUsername, LOVERS, Menu.editUser);
-            // let oldPassword = customer.password;
-            // let newPassword = GetInput.getPasswordToChange(oldPassword, Menu.editUser);
-            let newLover = new Lover(lover.loverID, name, zodiac, origin, YOB, hobby)
-            LOVERS.replaceCustomerInfo(lover.loverID, newLover);
-            Action.showNotification(`Successfully change user ID ${lover.loverID}`);
+            let newLover = new Lover(chosenLover.loverID, name, zodiac, origin, YOB, hobby)
+            LOVERS.replaceCustomerInfo(chosenLover.loverID, newLover);
+            Action.showNotification(`Successfully change lover with ID ${chosenLover.loverID}`);
         }
     }
 
@@ -111,12 +103,6 @@ export class Menu {
                 Action.showNotification(`Successfully remove lover with ID ${loverID}`);
             }
         }
-
-        // let userID: number = GetInput.receiveUserID(LOVERS, Menu.menuNavigation);
-        // if (GetInput.getConfirmation(Menu.removeUser,`you want to ${chalk.red("DELETE")} user ID ${chalk.redBright(userID)}`)) {
-        //     LOVERS.deleteCustomer(userID);
-        //     Action.showNotification(`Successfully remove user ID ${userID}`);
-        // }
     }
 
 }
