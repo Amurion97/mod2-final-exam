@@ -3,7 +3,7 @@ import {ProductDB} from "../model/manager/product-d-b";
 import {CartDB} from "../model/manager/cart-d-b";
 import {OrderHistoryDB} from "../model/manager/order-history-d-b";
 import {User} from "../model/user";
-import {LOVERS} from "./loverDB";
+import {LOVERS} from "../DB/loverDB";
 import {STORE} from "./product-sample";
 import {Product} from "../model/product";
 import {CART_DB} from "./user-cart";
